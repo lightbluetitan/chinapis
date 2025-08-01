@@ -1,0 +1,124 @@
+# Licensing Information for `ChinAPIs` Package
+
+This package, `ChinAPIs`, includes datasets sourced from various R packages. In order to maintain consistency and clarity, a naming convention has been applied where suffixes are added to the dataset names to indicate the type and format of the datasets. The original content of these datasets has not been altered in any way.
+
+## Dataset Licensing Information:
+
+- china_admin_divisions_df:
+  Originally ad from the cnmap 0.1.0 package, licensed under GPL-3. The dataset name has been changed to 'china_admin_divisions_df' to indicate that this dataset is a data frame object.
+
+- china_corruption_tbl_df:
+  Originally corruption from the regioncode 0.1.2 package, licensed under MIT + file LICENSE. The dataset name has been changed to 'china_corruption_tbl_df' to indicate that this dataset is a tibble object.
+
+- panda_locations_df:
+  Originally panda from the mkde 0.3 package, licensed under GPL (>= 3). The dataset name has been changed to 'panda_locations_df' to indicate that this dataset is a data frame object.
+
+- wenchuan_ptsd_matrix:
+  Originally Wenchuan from the bgms 0.1.4.2 package, licensed under GPL (>= 2). The dataset name has been changed to 'wenchuan_ptsd_matrix' to indicate that this dataset is a matrix object.
+
+- family_name_df:
+  Originally familyname from the ChineseNames 2023.8 package, licensed under GPL-3. The dataset name has been changed to 'family_name_df' to indicate that this dataset is a data frame object.
+
+- given_name_df:
+  Originally givenname from the ChineseNames 2023.8 package, licensed under GPL-3. The dataset name has been changed to 'given_name_df' to indicate that this dataset is a data frame object.
+
+- population_df:
+  Originally population from the ChineseNames 2023.8 package, licensed under GPL-3. The dataset name has been changed to 'population_df' to indicate that this dataset is a data frame object.
+
+- top1000name_prov_df:
+  Originally top1000name.prov from the ChineseNames 2023.8 package, licensed under GPL-3. The dataset name has been changed to 'top1000name_prov_df' to indicate that this dataset is a data frame object.
+
+- top100name_year_df:
+  Originally top100name.year from the ChineseNames 2023.8 package, licensed under GPL-3. The dataset name has been changed to 'top100name_year_df' to indicate that this dataset is a data frame object.
+
+- top50char_year_df:
+  Originally mex_inc_2016 from the ChineseNames 2023.8 package, licensed under GPL-3. The dataset name has been changed to 'top50char_year_df' to indicate that this dataset is a data frame object.
+
+- COVID19_HongKong_df:
+  Originally COVID19_JanApr2020_HongKong from the modelSSE 0.1-3 package, licensed under GPL-3. The dataset name has been changed to 'COVID19_HongKong_df' to indicate that this dataset is a data frame object.
+
+- sars_hong_kong_list:
+  Originally sars2003 from the EpiLPS 1.3.0 package, licensed under GPL-3. The dataset name has been changed to 'sars_hong_kong_list' to indicate that this dataset is a list object.
+
+- hk_street_names_tbl_df:
+  Originally hkstreetnames20 from the hkdatasets 1.0.0 package, licensed under GPL-3. The dataset name has been changed to 'hk_street_names_tbl_df' to indicate that this dataset is a tibble object.
+
+- hk_districts_tbl_df:
+  Originally hkdistrict_summary from the hkdatasets 1.0.0 package, licensed under GPL-3. The dataset name has been changed to 'hk_districts_tbl_df' to indicate that this dataset is a tibble object.
+
+- hk_councillors_tbl_df:
+  Originally hkdc from the hkdatasets 1.0.0 package, licensed under GPL-3. The dataset name has been changed to 'hk_councillors_tbl_df' to indicate that this dataset is a tibble object.
+
+- hk_population_tbl_df:
+  Originally hkagepop19 from the hkdatasets 1.0.0 package, licensed under GPL-3. The dataset name has been changed to 'hk_population_tbl_df' to indicate that this dataset is a tibble object.
+
+- health_family_life_df:
+  Originally CHFLS from the HSAUR3 1.0-15 package, licensed under GPL-2. The dataset name has been changed to 'health_family_life_df' to indicate that this dataset is a data frame object.
+
+- china_cars_tbl_df:
+  Originally cars_china from the logitr 1.1.2 package, licensed under MIT + file LICENSE. The dataset name has been changed to 'china_cars_tbl_df' to indicate that this dataset is a data frame object.
+
+- bj_air_quality_tbl_df:
+  Originally data_air from the gmgm 1.1.2 package, licensed under GPL-3. The dataset name has been changed to 'bj_air_quality_tbl_df' to indicate that this dataset is a tibble object.
+
+- shanghai_pm25_df:
+  Originally shan from the slm 1.2.0 package, licensed under GPL-3. The dataset name has been changed to 'shanghai_pm25_df' to indicate that this dataset is a data frame object.
+
+- shanghai_factories_df:
+  Originally E2.8 from the SenSrivastava 2015.6.25.1 package, licensed under GPL (>= 2). The dataset name has been changed to 'shanghai_factories_df' to indicate that this dataset is a data frame object.
+
+- china_io_2020_42_df:
+  Originally china_2020_42 from the ionet 0.2.2 package, licensed under GPL (>= 3). The dataset name has been changed to 'china_io_2020_42_df' to indicate that this dataset is a data frame object.
+
+- china_io_2020_153_df:
+  Originally china_2020_153 from the ionet 0.2.2 package, licensed under GPL (>= 3). The dataset name has been changed to 'china_io_2020_153_df' to indicate that this dataset is a data frame object.
+
+- china_io_2018_42_df:
+  Originally china_2018_42 from the ionet 0.2.2 package, licensed under GPL (>= 3). The dataset name has been changed to 'china_io_2018_42_df' to indicate that this dataset is a data frame object.
+
+- china_io_2018_153_df:
+  Originally china_2018_153 from the ionet 0.2.2 package, licensed under GPL (>= 3). The dataset name has been changed to 'china_io_2018_153_df' to indicate that this dataset is a data frame object.
+
+- china_io_2017_42_df:
+  Originally china_2017_42 from the ionet 0.2.2 package, licensed under GPL (>= 3). The dataset name has been changed to 'china_io_2017_42_df' to indicate that this dataset is a data frame object.
+
+- china_io_2017_149_df:
+  Originally china_2017_149 from the ionet 0.2.2 package, licensed under GPL (>= 3). The dataset name has been changed to 'china_io_2017_149_df' to indicate that this dataset is a data frame object.
+
+- china_io_2015_42_df:
+  Originally china_2015_42 from the ionet 0.2.2 package, licensed under GPL (>= 3). The dataset name has been changed to 'china_io_2015_42_df' to indicate that this dataset is a data frame object.
+
+- china_io_2012_139_df:
+  Originally china_2012_139 from the ionet 0.2.2 package, licensed under GPL (>= 3). The dataset name has been changed to 'china_io_2012_139_df' to indicate that this dataset is a data frame object.
+
+- china_io_2010_41_df:
+  Originally china_2010_41 from the ionet 0.2.2 package, licensed under GPL (>= 3). The dataset name has been changed to 'china_io_2010_41_df' to indicate that this dataset is a data frame object.
+
+- china_io_2002_122_df:
+  Originally china_2002_122 from the ionet 0.2.2 package, licensed under GPL (>= 3). The dataset name has been changed to 'china_io_2002_122_df' to indicate that this dataset is a data frame object.
+
+- china_io_2005_42_df:
+  Originally china_2005_42 from the ionet 0.2.2 package, licensed under GPL (>= 3). The dataset name has been changed to 'china_io_2005_42_df' to indicate that this dataset is a data frame object.
+
+- china_io_2007_135_df:
+  Originally china_2007_135 from the ionet 0.2.2 package, licensed under GPL (>= 3). The dataset name has been changed to 'china_io_2007_135_df' to indicate that this dataset is a data frame object.
+
+
+- Dataset: chinese_cities_tbl_df
+   Originally Name or Title: cn.csv
+   Source: simplemaps
+   URL: https://simplemaps.com/data/cn-cities
+   License: MIT License
+
+- Dataset: chinese_dams_tbl_df
+   Originally Name or Title: chinese_dams.csv
+   Source: kaggle
+   URL: https://www.kaggle.com/datasets/alexandrepetit881234/chinese-dams
+   License: CC0: Public Domain
+
+
+## License
+
+All datasets in this package are provided under the same licenses as their original sources. The licensing information and any specific attribution required for each dataset can be found within their respective packages. Users must adhere to the licensing terms specified by each original source.
+
+The code in this package, `ChinAPIs`, is licensed under the MIT License. See the LICENSE file in the root directory for details.

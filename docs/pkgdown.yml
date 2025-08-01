@@ -1,0 +1,9 @@
+pandoc: '3.4'
+pkgdown: 2.1.3
+pkgdown_sha: ~
+articles:
+  ChinAPIs_vignette: ChinAPIs_vignette.html
+last_built: 2025-08-01T21:17Z
+urls:
+  reference: http://lightbluetitan.github.io/chinapis/reference
+  article: http://lightbluetitan.github.io/chinapis/articles
