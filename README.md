@@ -88,10 +88,9 @@ Here are some featured examples:
 
 library(ChinAPIs)
 
-# Retrieves essential information about China or any other country
+# Retrieves essential information about China
 
 get_country_info_cn()
-
 
 # Get China's Population (Total) from World Bank
 
