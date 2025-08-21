@@ -3,7 +3,7 @@ pkgdown: 2.1.3
 pkgdown_sha: ~
 articles:
   ChinAPIs_vignette: ChinAPIs_vignette.html
-last_built: 2025-08-01T21:17Z
+last_built: 2025-08-21T05:49Z
 urls:
-  reference: http://lightbluetitan.github.io/chinapis/reference
-  article: http://lightbluetitan.github.io/chinapis/articles
+  reference: https://lightbluetitan.github.io/chinapis/reference
+  article: https://lightbluetitan.github.io/chinapis/articles

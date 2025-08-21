@@ -9,37 +9,52 @@
 
 library(testthat)
 
-test_that("get_country_info_cn() returns a data frame with correct structure for 'China'", {
+test_that("get_country_info_cn() returns a tibble with expected structure and types", {
   skip_on_cran()
-  result <- get_country_info_cn("China")
+  result <- get_country_info_cn()
 
-  expect_s3_class(result, "data.frame")
-  expect_named(result, c(
+  # Class check
+  expect_s3_class(result, "tbl_df")
+
+  # Dimension check
+  expect_equal(nrow(result), 1)
+  expect_equal(ncol(result), 8)
+
+  # Column name check
+  expected_names <- c(
     "name_common", "name_official", "region", "subregion",
     "capital", "area", "population", "languages"
-  ))
+  )
+  expect_named(result, expected_names)
+
+  # Column type checks
+  expect_type(result$name_common, "character")
+  expect_type(result$name_official, "character")
+  expect_type(result$region, "character")
+  expect_type(result$subregion, "character")
+  expect_type(result$capital, "character")
+  expect_type(result$languages, "character")
+  expect_type(result$area, "double")
+  expect_type(result$population, "integer")
+})
+
+test_that("get_country_info_cn() returns correct values for China", {
+  skip_on_cran()
+  result <- get_country_info_cn()
 
   expect_equal(result$name_common, "China")
   expect_equal(result$name_official, "People's Republic of China")
   expect_equal(result$region, "Asia")
   expect_equal(result$subregion, "Eastern Asia")
-  expect_true("Beijing" %in% result$capital)
-  expect_true(is.numeric(result$area))
-  expect_true(is.numeric(result$population))
-  expect_true(grepl("Chinese", result$languages))
+  expect_equal(result$capital, "Beijing")
+  expect_equal(result$area, 9706961)
+  expect_equal(result$population, 1402112000)
+  expect_equal(result$languages, "Chinese")
 })
 
-test_that("get_country_info_cn() returns correct values for 'Peru'", {
+test_that("get_country_info_cn() has non-missing values for all fields", {
   skip_on_cran()
-  result <- get_country_info_cn("Peru")
+  result <- get_country_info_cn()
 
-  expect_s3_class(result, "data.frame")
-  expect_equal(result$name_common, "Peru")
-  expect_equal(result$name_official, "Republic of Peru")
-  expect_equal(result$region, "Americas")
-  expect_equal(result$subregion, "South America")
-  expect_true("Lima" %in% result$capital)
-  expect_true(is.numeric(result$area))
-  expect_true(is.numeric(result$population))
-  expect_true(any(grepl("Spanish|Quechua|Aymara", result$languages)))
+  expect_false(any(is.na(result)))
 })

@@ -31,8 +31,7 @@ library(ChinAPIs)
 
 Below is a list of the main functions included in the package:
 
-- `get_country_info_cn()`: Get key geopolitical and administrative information about China or other countries from the REST Countries API
-   (e.g., get_country_info_cn("china"), get_country_info_cn("peru")).
+- `get_country_info_cn()`: Get key geopolitical and administrative information about China from the REST Countries API.
 
 - `get_china_gdp()`: Get China’s Gross Domestic Product (current US$) from the World Bank
 
@@ -69,7 +68,7 @@ Each dataset in `ChinAPIs` is labeled with a *suffix* to indicate its structure 
 
 - `_matrix`: A matrix object.
 
-## Datasets Included in MexicoDataAPI
+## Datasets Included in ChinAPIs
 
 In addition to API access functions, `ChinAPIs` provides several preloaded datasets related to China’s air quality, demographics, input-output tables, epidemiology, political 
 structure, names, and social indicators. 
@@ -91,11 +90,8 @@ library(ChinAPIs)
 
 # Retrieves essential information about China or any other country
 
-get_country_info_cn("China")
+get_country_info_cn()
 
-get_country_info_cn("china")
-
-get_country_info_cn("peru")
 
 # Get China's Population (Total) from World Bank
 

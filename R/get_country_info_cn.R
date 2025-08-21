@@ -7,15 +7,14 @@
 #' Get Key Country Information About China from the REST Countries API
 #'
 #' @description
-#' Retrieves selected, essential information about China or any other country by its full name.
-#' The data is retrieved from the REST Countries API.
+#' Retrieves selected, essential information about China using the REST Countries API.
+#' The function returns a tibble with core details such as population, area, capital, region,
+#' and official language(s).
 #'
 #' See the API documentation at \url{https://restcountries.com/}.
 #' Example API usage: \url{https://restcountries.com/v3.1/name/china?fullText=true}.
 #'
-#' @param name Full country name (common or official). For example: "China", "Mexico", "Peru".
-#'
-#' @return A data frame with 8 columns:
+#' @return A tibble with the following 8 columns:
 #' \itemize{
 #'   \item \code{name_common}: Common name of the country.
 #'   \item \code{name_official}: Official name of the country.
@@ -28,28 +27,23 @@
 #' }
 #'
 #' @details
-#' The function sends a GET request to the REST Countries API. If the API returns data for the specified country,
-#' the function extracts and returns selected fields as a data frame. If the country is not found or the request fails,
-#' the function returns \code{NULL} and prints a message.
+#' The function sends a GET request to the REST Countries API. If the API returns data for China,
+#' the function extracts and returns selected fields as a tibble. If the request fails or
+#' China is not found, it returns \code{NULL} and prints a message.
 #'
 #' @note Requires internet connection. The data is retrieved in real time from the REST Countries API.
 #'
 #' @source REST Countries API: \url{https://restcountries.com/}
 #'
 #' @examples
-#' \dontrun{
-#' get_country_info_cn("China")
-#' get_country_info_cn("France")
-#' get_country_info_cn("Mexico")
-#' }
-#'
-#' @seealso \code{\link[httr]{GET}}, \code{\link[jsonlite]{fromJSON}}, \code{\link[base]{data.frame}}
+#' get_country_info_cn()
 #'
 #' @importFrom httr GET content http_error
 #' @importFrom jsonlite fromJSON
+#' @importFrom tibble tibble
 #' @export
-get_country_info_cn <- function(name) {
-  url <- paste0("https://restcountries.com/v3.1/name/", utils::URLencode(name), "?fullText=true")
+get_country_info_cn <- function() {
+  url <- "https://restcountries.com/v3.1/name/china?fullText=true"
   response <- httr::GET(url)
   if (httr::http_error(response)) {
     message("API request failed.")
@@ -58,19 +52,18 @@ get_country_info_cn <- function(name) {
   data_raw <- httr::content(response, as = "text", encoding = "UTF-8")
   data_list <- jsonlite::fromJSON(data_raw)
   if (length(data_list) == 0) {
-    message("No data found for the specified country.")
+    message("No data found for China.")
     return(NULL)
   }
-  df <- data.frame(
-    name_common   = data_list$name$common,
-    name_official = data_list$name$official,
-    region        = data_list$region,
-    subregion     = data_list$subregion,
-    capital       = paste(data_list$capital, collapse = ", "),
-    area          = data_list$area,
-    population    = data_list$population,
-    languages     = paste(unlist(data_list$languages), collapse = ", "),
-    stringsAsFactors = FALSE
+  data <- data_list[1, ]  # Only one country should be returned
+  tibble::tibble(
+    name_common   = data$name$common,
+    name_official = data$name$official,
+    region        = data$region,
+    subregion     = data$subregion,
+    capital       = paste(data$capital, collapse = ", "),
+    area          = data$area,
+    population    = data$population,
+    languages     = paste(unlist(data$languages), collapse = ", ")
   )
-  return(df)
 }

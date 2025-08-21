@@ -1,8 +1,8 @@
-# Licensing Information for `ChinAPIs` Package
+Licensing Information for ChinAPIs Package
 
-This package, `ChinAPIs`, includes datasets sourced from various R packages. In order to maintain consistency and clarity, a naming convention has been applied where suffixes are added to the dataset names to indicate the type and format of the datasets. The original content of these datasets has not been altered in any way.
+This package, ChinAPIs, includes datasets sourced from various R packages. In order to maintain consistency and clarity, a naming convention has been applied where suffixes are added to the dataset names to indicate the type and format of the datasets. The original content of these datasets has not been altered in any way.
 
-## Dataset Licensing Information:
+Dataset Licensing Information:
 
 - china_admin_divisions_df:
   Originally ad from the cnmap 0.1.0 package, licensed under GPL-3. The dataset name has been changed to 'china_admin_divisions_df' to indicate that this dataset is a data frame object.
@@ -121,4 +121,4 @@ This package, `ChinAPIs`, includes datasets sourced from various R packages. In 
 
 All datasets in this package are provided under the same licenses as their original sources. The licensing information and any specific attribution required for each dataset can be found within their respective packages. Users must adhere to the licensing terms specified by each original source.
 
-The code in this package, `ChinAPIs`, is licensed under the MIT License. See the LICENSE file in the root directory for details.
+The code in this package, ChinAPIs, is licensed under the MIT License. See the LICENSE file in the root directory for details.

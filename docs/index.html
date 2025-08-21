@@ -18,7 +18,7 @@
 <script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Access Chinese Data via Public APIs and Curated Datasets">
 <meta name="description" content="Provides functions to access data from public RESTful APIs including Nager.Date, World Bank API, and REST Countries API, retrieving real-time or historical data related to China, such as holidays, economic indicators, and international demographic and geopolitical indicators. Additionally, the package includes one of the largest curated collections of open datasets focused on China and Hong Kong, covering topics such as air quality, demographics, input-output tables, epidemiology, political structure, names, and social indicators. The package supports reproducible research and teaching by integrating reliable international APIs and structured datasets from public, academic, and government sources. For more information on the APIs, see: Nager.Date &lt;https://date.nager.at/Api&gt;, World Bank API &lt;https://datahelpdesk.worldbank.org/knowledgebase/articles/889392&gt;, and REST Countries API &lt;https://restcountries.com/&gt;.">
 <meta property="og:description" content="Provides functions to access data from public RESTful APIs including Nager.Date, World Bank API, and REST Countries API, retrieving real-time or historical data related to China, such as holidays, economic indicators, and international demographic and geopolitical indicators. Additionally, the package includes one of the largest curated collections of open datasets focused on China and Hong Kong, covering topics such as air quality, demographics, input-output tables, epidemiology, political structure, names, and social indicators. The package supports reproducible research and teaching by integrating reliable international APIs and structured datasets from public, academic, and government sources. For more information on the APIs, see: Nager.Date &lt;https://date.nager.at/Api&gt;, World Bank API &lt;https://datahelpdesk.worldbank.org/knowledgebase/articles/889392&gt;, and REST Countries API &lt;https://restcountries.com/&gt;.">
-<meta property="og:image" content="http://lightbluetitan.github.io/chinapis/logo.png">
+<meta property="og:image" content="https://lightbluetitan.github.io/chinapis/logo.png">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
@@ -85,7 +85,7 @@
 </h3>
 <p>Below is a list of the main functions included in the package:</p>
 <ul>
-<li><p><code><a href="reference/get_country_info_cn.html">get_country_info_cn()</a></code>: Get key geopolitical and administrative information about China or other countries from the REST Countries API (e.g., get_country_info_cn(“china”), get_country_info_cn(“peru”)).</p></li>
+<li><p><code><a href="reference/get_country_info_cn.html">get_country_info_cn()</a></code>: Get key geopolitical and administrative information about China from the REST Countries API.</p></li>
 <li><p><code><a href="reference/get_china_gdp.html">get_china_gdp()</a></code>: Get China’s Gross Domestic Product (current US$) from the World Bank</p></li>
 <li><p><code><a href="reference/get_china_cpi.html">get_china_cpi()</a></code>: Get China’s Consumer Price Index from World Bank</p></li>
 <li><p><code><a href="reference/get_china_population.html">get_china_population()</a></code>: Get China’s total population from the World Bank</p></li>
@@ -112,7 +112,7 @@
 </ul>
 </div>
 <div class="section level2">
-<h2 id="datasets-included-in-mexicodataapi">Datasets Included in MexicoDataAPI<a class="anchor" aria-label="anchor" href="#datasets-included-in-mexicodataapi"></a>
+<h2 id="datasets-included-in-chinapis">Datasets Included in ChinAPIs<a class="anchor" aria-label="anchor" href="#datasets-included-in-chinapis"></a>
 </h2>
 <p>In addition to API access functions, <code>ChinAPIs</code> provides several preloaded datasets related to China’s air quality, demographics, input-output tables, epidemiology, political structure, names, and social indicators. Here are some featured examples:</p>
 <ul>
@@ -132,11 +132,8 @@
 <span></span>
 <span><span class="co"># Retrieves essential information about China or any other country</span></span>
 <span></span>
-<span><span class="fu"><a href="reference/get_country_info_cn.html">get_country_info_cn</a></span><span class="op">(</span><span class="st">"China"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="reference/get_country_info_cn.html">get_country_info_cn</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="reference/get_country_info_cn.html">get_country_info_cn</a></span><span class="op">(</span><span class="st">"china"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="reference/get_country_info_cn.html">get_country_info_cn</a></span><span class="op">(</span><span class="st">"peru"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Get China's Population (Total) from World Bank</span></span>
 <span></span>

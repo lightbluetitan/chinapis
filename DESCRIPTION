@@ -17,7 +17,8 @@ Description: Provides functions to access data from public RESTful APIs includin
     'World Bank API' <https://datahelpdesk.worldbank.org/knowledgebase/articles/889392>, 
     and 'REST Countries API' <https://restcountries.com/>.
 License: MIT + file LICENSE
-URL: https://github.com/lightbluetitan/chinapis, http://lightbluetitan.github.io/chinapis/
+Language: en
+URL: https://github.com/lightbluetitan/chinapis, https://lightbluetitan.github.io/chinapis/
 BugReports: https://github.com/lightbluetitan/chinapis/issues
 Encoding: UTF-8
 LazyData: true

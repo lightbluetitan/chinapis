@@ -7,13 +7,10 @@
 REST Countries API: \url{https://restcountries.com/}
 }
 \usage{
-get_country_info_cn(name)
-}
-\arguments{
-\item{name}{Full country name (common or official). For example: "China", "Mexico", "Peru".}
+get_country_info_cn()
 }
 \value{
-A data frame with 8 columns:
+A tibble with the following 8 columns:
 \itemize{
   \item \code{name_common}: Common name of the country.
   \item \code{name_official}: Official name of the country.
@@ -26,28 +23,22 @@ A data frame with 8 columns:
 }
 }
 \description{
-Retrieves selected, essential information about China or any other country by its full name.
-The data is retrieved from the REST Countries API.
+Retrieves selected, essential information about China using the REST Countries API.
+The function returns a tibble with core details such as population, area, capital, region,
+and official language(s).
 
 See the API documentation at \url{https://restcountries.com/}.
 Example API usage: \url{https://restcountries.com/v3.1/name/china?fullText=true}.
 }
 \details{
-The function sends a GET request to the REST Countries API. If the API returns data for the specified country,
-the function extracts and returns selected fields as a data frame. If the country is not found or the request fails,
-the function returns \code{NULL} and prints a message.
+The function sends a GET request to the REST Countries API. If the API returns data for China,
+the function extracts and returns selected fields as a tibble. If the request fails or
+China is not found, it returns \code{NULL} and prints a message.
 }
 \note{
 Requires internet connection. The data is retrieved in real time from the REST Countries API.
 }
 \examples{
-\dontrun{
-get_country_info_cn("China")
-get_country_info_cn("France")
-get_country_info_cn("Mexico")
-}
+get_country_info_cn()
 
-}
-\seealso{
-\code{\link[httr]{GET}}, \code{\link[jsonlite]{fromJSON}}, \code{\link[base]{data.frame}}
 }

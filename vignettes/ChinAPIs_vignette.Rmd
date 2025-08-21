@@ -54,7 +54,7 @@ Below is a list of the main functions included in the package:
 
 - `get_china_hospital_beds()`: Get hospital beds per 1,000 people in China from the World Bank
 
-- `get_china_holidays()`: Retrieve Chinese public holidays (including past and upcoming dates) from the Nager.Date API
+- `get_china_holidays()`: Get official public holidays in China for a given year, e.g. get_china_holidays(2025)
 
 - `view_datasets_ChinAPIs()`: Lists all curated datasets included in the ChinAPIs package
 
