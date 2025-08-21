@@ -23,7 +23,7 @@ data(bj_air_quality_tbl_df)
 \description{
 This dataset, bj_air_quality_tbl_df, is a tibble containing hourly air pollutant and weather measurements
 from the Dongsi air quality monitoring site in Beijing, China. The data covers 320 complete days of the year 2015
-and includes variables such as nitrogen dioxide (NO₂), ozone (O₃), temperature, and wind speed.
+and includes variables such as nitrogen dioxide (NO\eqn{_2}), ozone (O\eqn{_3}), temperature, and wind speed.
 }
 \details{
 The dataset name has been kept as 'bj_air_quality_tbl_df' to avoid confusion with other datasets
