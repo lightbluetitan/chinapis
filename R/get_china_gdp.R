@@ -1,6 +1,6 @@
 # ChinAPIs - Access Chinese Data via APIs and Curated Datasets
-# Version 0.1.0
-# Copyright (c) 2025 Renzo Caceres Rossi
+# Version 0.1.1
+# Copyright (c) 2026 Renzo Caceres Rossi
 # Licensed under the MIT License.
 # See the LICENSE file in the root directory for full license text.
 
@@ -42,26 +42,65 @@
 #'
 #' @export
 get_china_gdp <- function() {
+
   url <- "https://api.worldbank.org/v2/country/CHN/indicator/NY.GDP.MKTP.CD?format=json&date=2010:2022&per_page=100"
-  res <- httr::GET(url)
-  if (res$status_code != 200) {
-    message(paste("Error: status", res$status_code))
+
+  # Safe request with timeout
+  res <- tryCatch(
+    httr::GET(url, httr::timeout(10)),
+    error = function(e) {
+      message("World Bank API request failed: ", e$message)
+      return(NULL)
+    }
+  )
+
+  if (is.null(res)) {
     return(NULL)
   }
-  content <- jsonlite::fromJSON(httr::content(res, "text", encoding = "UTF-8"))
+
+  if (httr::status_code(res) != 200) {
+    message("World Bank API returned status: ", httr::status_code(res))
+    return(NULL)
+  }
+
+  txt <- tryCatch(
+    httr::content(res, as = "text", encoding = "UTF-8"),
+    error = function(e) {
+      message("Failed to retrieve API content.")
+      return(NULL)
+    }
+  )
+
+  if (is.null(txt)) {
+    return(NULL)
+  }
+
+  content <- tryCatch(
+    jsonlite::fromJSON(txt),
+    error = function(e) {
+      message("Failed to parse JSON response.")
+      return(NULL)
+    }
+  )
+
   if (length(content) < 2 || is.null(content[[2]])) {
     message("No data returned from the World Bank API.")
     return(NULL)
   }
+
   data <- content[[2]]
+
   df <- dplyr::as_tibble(data.frame(
     indicator = data$indicator$value,
-    country = data$country$value,
-    year = as.integer(data$date),
-    value = data$value
-  )) |>
-    dplyr::mutate(
-      value_label = scales::comma(value, accuracy = 1)
-    )
+    country   = data$country$value,
+    year      = as.integer(data$date),
+    value     = as.numeric(data$value)
+  ))
+
+  df <- dplyr::mutate(
+    df,
+    value_label = scales::comma(value, accuracy = 1)
+  )
+
   return(df)
 }

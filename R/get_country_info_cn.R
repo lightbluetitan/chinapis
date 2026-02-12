@@ -1,6 +1,6 @@
 # ChinAPIs - Access Chinese Data via APIs and Curated Datasets
-# Version 0.1.0
-# Copyright (c) 2025 Renzo Caceres Rossi
+# Version 0.1.1
+# Copyright (c) 2026 Renzo Caceres Rossi
 # Licensed under the MIT License.
 # See the LICENSE file in the root directory for full license text.
 
@@ -42,28 +42,62 @@
 #' @importFrom jsonlite fromJSON
 #' @importFrom tibble tibble
 #' @export
+#' @export
 get_country_info_cn <- function() {
+
   url <- "https://restcountries.com/v3.1/name/china?fullText=true"
-  response <- httr::GET(url)
+
+  response <- tryCatch(
+    httr::GET(url, httr::timeout(10)),
+    error = function(e) return(NULL)
+  )
+
+  if (is.null(response)) {
+    return(NULL)
+  }
+
   if (httr::http_error(response)) {
-    message("API request failed.")
     return(NULL)
   }
-  data_raw <- httr::content(response, as = "text", encoding = "UTF-8")
-  data_list <- jsonlite::fromJSON(data_raw)
-  if (length(data_list) == 0) {
-    message("No data found for China.")
+
+  txt <- tryCatch(
+    httr::content(response, as = "text", encoding = "UTF-8"),
+    error = function(e) return(NULL)
+  )
+
+  if (is.null(txt) || nchar(txt) == 0) {
     return(NULL)
   }
-  data <- data_list[1, ]  # Only one country should be returned
+
+  data_list <- tryCatch(
+    jsonlite::fromJSON(txt),
+    error = function(e) return(NULL)
+  )
+
+  if (is.null(data_list) || length(data_list) == 0) {
+    return(NULL)
+  }
+
+  data <- data_list[1, ]
+
+  # Defensive extraction
+  name_common   <- if (!is.null(data$name$common)) data$name$common else NA_character_
+  name_official <- if (!is.null(data$name$official)) data$name$official else NA_character_
+  region        <- if (!is.null(data$region)) data$region else NA_character_
+  subregion     <- if (!is.null(data$subregion)) data$subregion else NA_character_
+  capital       <- if (!is.null(data$capital)) paste(data$capital, collapse = ", ") else NA_character_
+  area          <- if (!is.null(data$area)) data$area else NA_real_
+  population    <- if (!is.null(data$population)) data$population else NA_real_
+  languages     <- if (!is.null(data$languages)) paste(unlist(data$languages), collapse = ", ") else NA_character_
+
   tibble::tibble(
-    name_common   = data$name$common,
-    name_official = data$name$official,
-    region        = data$region,
-    subregion     = data$subregion,
-    capital       = paste(data$capital, collapse = ", "),
-    area          = data$area,
-    population    = data$population,
-    languages     = paste(unlist(data$languages), collapse = ", ")
+    name_common   = name_common,
+    name_official = name_official,
+    region        = region,
+    subregion     = subregion,
+    capital       = capital,
+    area          = area,
+    population    = population,
+    languages     = languages
   )
 }

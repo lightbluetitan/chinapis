@@ -1,38 +1,60 @@
 # ChinAPIs - Access Chinese Data via APIs and Curated Datasets
-# Version 0.1.0
-# Copyright (c) 2025 Renzo Caceres Rossi
+# Version 0.1.1
+# Copyright (c) 2026 Renzo Caceres Rossi
 # Licensed under the MIT License.
 # See the LICENSE file in the root directory for full license text.
 
 # get_china_life_expectancy
 
+
 library(testthat)
 
-test_that("get_china_life_expectancy returns a tibble with correct structure and values", {
-  result <- get_china_life_expectancy()
+life_expectancy_data <- get_china_life_expectancy()
 
-  # Check object type
-  expect_s3_class(result, "tbl_df")
+test_that("get_china_life_expectancy returns valid tibble structure", {
+  skip_if(is.null(life_expectancy_data), "Function returned NULL")
 
-  # Check number of rows (2010–2022 = 13 years)
-  expect_equal(nrow(result), 13)
+  expect_s3_class(life_expectancy_data, "tbl_df")
+  expect_s3_class(life_expectancy_data, "data.frame")
+  expect_equal(ncol(life_expectancy_data), 4)
+  expect_equal(nrow(life_expectancy_data), 13)
+  expect_equal(names(life_expectancy_data), c("indicator", "country", "year", "value"))
+})
 
-  # Check column names
-  expected_names <- c("indicator", "country", "year", "value")
-  expect_named(result, expected_names)
+test_that("get_china_life_expectancy returns correct column types", {
+  skip_if(is.null(life_expectancy_data), "Function returned NULL")
 
-  # Check column types
-  expect_type(result$indicator, "character")
-  expect_type(result$country, "character")
-  expect_type(result$year, "integer")
-  expect_type(result$value, "double")
+  expect_type(life_expectancy_data$indicator, "character")
+  expect_type(life_expectancy_data$country, "character")
+  expect_type(life_expectancy_data$year, "integer")
+  expect_type(life_expectancy_data$value, "double")
+})
 
-  # Check unique values
-  expect_true(all(result$country == "China"))
-  expect_true(all(result$indicator == "Life expectancy at birth, total (years)"))
-  expect_true(all(result$year %in% 2010:2022))
-  expect_true(all(result$value > 0))
+test_that("get_china_life_expectancy returns correct indicator and country", {
+  skip_if(is.null(life_expectancy_data), "Function returned NULL")
 
-  # Check for missing values
-  expect_false(any(is.na(result$value)))
+  expect_true(all(life_expectancy_data$indicator == "Life expectancy at birth, total (years)"))
+  expect_true(all(life_expectancy_data$country == "China"))
+})
+
+test_that("get_china_life_expectancy year column is complete and valid", {
+  skip_if(is.null(life_expectancy_data), "Function returned NULL")
+
+  expect_equal(sort(life_expectancy_data$year), 2010:2022)
+  expect_equal(length(unique(life_expectancy_data$year)), 13)
+})
+
+test_that("get_china_life_expectancy value column is valid", {
+  skip_if(is.null(life_expectancy_data), "Function returned NULL")
+
+  expect_false(any(is.na(life_expectancy_data$value)))
+  expect_true(all(life_expectancy_data$value > 0))
+  expect_true(all(life_expectancy_data$value >= 50))
+  expect_true(all(life_expectancy_data$value <= 100))
+})
+
+test_that("get_china_life_expectancy returns no duplicate rows", {
+  skip_if(is.null(life_expectancy_data), "Function returned NULL")
+
+  expect_equal(nrow(life_expectancy_data), nrow(unique(life_expectancy_data)))
 })

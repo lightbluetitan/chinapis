@@ -1,6 +1,6 @@
 # ChinAPIs - Access Chinese Data via APIs and Curated Datasets
-# Version 0.1.0
-# Copyright (c) 2025 Renzo Caceres Rossi
+# Version 0.1.1
+# Copyright (c) 2026 Renzo Caceres Rossi
 # Licensed under the MIT License.
 # See the LICENSE file in the root directory for full license text.
 
@@ -42,23 +42,40 @@
 #'
 #' @export
 get_china_hospital_beds <- function() {
+
   url <- "https://api.worldbank.org/v2/country/CHN/indicator/SH.MED.BEDS.ZS?format=json&date=2010:2022&per_page=100"
-  res <- httr::GET(url)
-  if (res$status_code != 200) {
-    message(paste("Error: status", res$status_code))
+
+  result <- tryCatch({
+
+    res <- httr::GET(url, httr::timeout(10))
+
+    if (httr::status_code(res) != 200) {
+      message("World Bank API returned status: ", httr::status_code(res))
+      return(NULL)
+    }
+
+    content <- jsonlite::fromJSON(
+      httr::content(res, "text", encoding = "UTF-8")
+    )
+
+    if (length(content) < 2 || is.null(content[[2]])) {
+      message("No data returned from the World Bank API.")
+      return(NULL)
+    }
+
+    data <- content[[2]]
+
+    dplyr::as_tibble(data.frame(
+      indicator = data$indicator$value,
+      country   = data$country$value,
+      year      = as.integer(data$date),
+      value     = as.numeric(data$value)
+    ))
+
+  }, error = function(e) {
+    message("The World Bank API is currently unavailable. Please try again later.")
     return(NULL)
-  }
-  content <- jsonlite::fromJSON(httr::content(res, "text", encoding = "UTF-8"))
-  if (length(content) < 2 || is.null(content[[2]])) {
-    message("No data returned from the World Bank API.")
-    return(NULL)
-  }
-  data <- content[[2]]
-  df <- dplyr::as_tibble(data.frame(
-    indicator = data$indicator$value,
-    country = data$country$value,
-    year = as.integer(data$date),
-    value = data$value
-  ))
-  return(df)
+  })
+
+  return(result)
 }

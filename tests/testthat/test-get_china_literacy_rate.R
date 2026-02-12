@@ -1,40 +1,64 @@
 # ChinAPIs - Access Chinese Data via APIs and Curated Datasets
-# Version 0.1.0
-# Copyright (c) 2025 Renzo Caceres Rossi
+# Version 0.1.1
+# Copyright (c) 2026 Renzo Caceres Rossi
 # Licensed under the MIT License.
 # See the LICENSE file in the root directory for full license text.
 
 # get_china_literacy_rate
 
+
 library(testthat)
 
-test_that("get_china_literacy_rate() returns valid structure and types", {
-  result <- get_china_literacy_rate()
+literacy_rate_data <- get_china_literacy_rate()
 
-  # Check that the result is a tibble
-  expect_s3_class(result, "tbl_df")
+test_that("get_china_literacy_rate returns valid tibble structure", {
+  skip_if(is.null(literacy_rate_data), "Function returned NULL")
 
-  # Check the column names
-  expect_named(result, c("indicator", "country", "year", "value"))
+  expect_s3_class(literacy_rate_data, "tbl_df")
+  expect_s3_class(literacy_rate_data, "data.frame")
+  expect_equal(ncol(literacy_rate_data), 4)
+  expect_equal(nrow(literacy_rate_data), 13)
+  expect_equal(names(literacy_rate_data), c("indicator", "country", "year", "value"))
+})
 
-  # Check that all columns exist and are of correct type
-  expect_type(result$indicator, "character")
-  expect_type(result$country, "character")
-  expect_type(result$year, "integer")
-  expect_true(is.numeric(result$value) || is.integer(result$value))  # to allow integer or numeric
+test_that("get_china_literacy_rate returns correct column types", {
+  skip_if(is.null(literacy_rate_data), "Function returned NULL")
 
-  # Check that all country values are "China"
-  expect_true(all(result$country == "China"))
+  expect_type(literacy_rate_data$indicator, "character")
+  expect_type(literacy_rate_data$country, "character")
+  expect_type(literacy_rate_data$year, "integer")
+  expect_true(is.numeric(literacy_rate_data$value))
+})
 
-  # Check that indicator name is consistent
-  expect_true(all(result$indicator == "Literacy rate, adult total (% of people ages 15 and above)"))
+test_that("get_china_literacy_rate returns correct indicator and country", {
+  skip_if(is.null(literacy_rate_data), "Function returned NULL")
 
-  # Check that years are within the expected range
-  expect_true(all(result$year >= 2010 & result$year <= 2022))
+  expect_true(all(literacy_rate_data$indicator == "Literacy rate, adult total (% of people ages 15 and above)"))
+  expect_true(all(literacy_rate_data$country == "China"))
+})
 
-  # Check that the number of rows is correct (should be 13 for 2010–2022)
-  expect_equal(nrow(result), 13)
+test_that("get_china_literacy_rate year column is complete and valid", {
+  skip_if(is.null(literacy_rate_data), "Function returned NULL")
 
-  # Check that there are NAs allowed in value column (not a failure if present)
-  expect_true(any(is.na(result$value)) || any(!is.na(result$value)))
+  expect_equal(sort(literacy_rate_data$year), 2010:2022)
+  expect_equal(length(unique(literacy_rate_data$year)), 13)
+})
+
+test_that("get_china_literacy_rate value column handles data correctly", {
+  skip_if(is.null(literacy_rate_data), "Function returned NULL")
+
+  # Verificar valores no-NA
+  non_na_values <- literacy_rate_data$value[!is.na(literacy_rate_data$value)]
+
+  if(length(non_na_values) > 0) {
+    expect_true(all(non_na_values >= 0))
+    expect_true(all(non_na_values <= 100))
+    expect_true(all(is.finite(non_na_values)))
+  }
+})
+
+test_that("get_china_literacy_rate returns no duplicate rows", {
+  skip_if(is.null(literacy_rate_data), "Function returned NULL")
+
+  expect_equal(nrow(literacy_rate_data), nrow(unique(literacy_rate_data)))
 })

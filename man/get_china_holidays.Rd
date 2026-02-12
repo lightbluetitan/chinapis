@@ -4,34 +4,30 @@
 \alias{get_china_holidays}
 \title{Get Official Public Holidays in China for a Given Year}
 \source{
-Data obtained from the Nager.Date API: \url{https://date.nager.at/}
+\url{https://date.nager.at/}
 }
 \usage{
 get_china_holidays(year)
 }
 \arguments{
-\item{year}{An integer indicating the year (e.g., 2024 or 2025).}
+\item{year}{An integer indicating the year (e.g., 2024).}
 }
 \value{
 A tibble with the following columns:
 \itemize{
   \item \code{date}: Date of the holiday (class \code{Date})
-  \item \code{local_name}: Holiday name in the local language (Chinese)
+  \item \code{local_name}: Holiday name in the local language
   \item \code{name}: Holiday name in English
 }
+Returns \code{NULL} if the API request fails.
 }
 \description{
 Retrieves the list of official public holidays in China for a specific year
 using the Nager.Date public holidays API.
-This function returns a tibble containing the date of the holiday, the name
-in the local language (Chinese), and the English name.
-It is useful for academic, planning, and data analysis purposes.
-The information is retrieved directly from the Nager.Date API and reflects
-the current status of holidays for the requested year.
-The field names returned are consistent with the API structure.
 }
 \examples{
-get_china_holidays(2024)
-get_china_holidays(2025)
+if (interactive()) {
+  get_china_holidays(2024)
+}
 
 }

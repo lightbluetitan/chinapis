@@ -1,6 +1,6 @@
 # ChinAPIs - Access Chinese Data via APIs and Curated Datasets
-# Version 0.1.0
-# Copyright (c) 2025 Renzo Caceres Rossi
+# Version 0.1.1
+# Copyright (c) 2026 Renzo Caceres Rossi
 # Licensed under the MIT License.
 # See the LICENSE file in the root directory for full license text.
 
@@ -9,40 +9,79 @@
 #' @description
 #' Retrieves the list of official public holidays in China for a specific year
 #' using the Nager.Date public holidays API.
-#' This function returns a tibble containing the date of the holiday, the name
-#' in the local language (Chinese), and the English name.
-#' It is useful for academic, planning, and data analysis purposes.
-#' The information is retrieved directly from the Nager.Date API and reflects
-#' the current status of holidays for the requested year.
-#' The field names returned are consistent with the API structure.
 #'
-#' @param year An integer indicating the year (e.g., 2024 or 2025).
+#' @param year An integer indicating the year (e.g., 2024).
 #'
 #' @return A tibble with the following columns:
 #' \itemize{
 #'   \item \code{date}: Date of the holiday (class \code{Date})
-#'   \item \code{local_name}: Holiday name in the local language (Chinese)
+#'   \item \code{local_name}: Holiday name in the local language
 #'   \item \code{name}: Holiday name in English
 #' }
+#' Returns \code{NULL} if the API request fails.
 #'
-#' @source Data obtained from the Nager.Date API: \url{https://date.nager.at/}
+#' @source \url{https://date.nager.at/}
 #'
 #' @examples
-#' get_china_holidays(2024)
-#' get_china_holidays(2025)
+#' if (interactive()) {
+#'   get_china_holidays(2024)
+#' }
 #'
-#' @importFrom httr GET status_code content
+#' @importFrom httr GET timeout status_code content
 #' @importFrom jsonlite fromJSON
 #' @importFrom tibble tibble
 #'
 #' @export
 get_china_holidays <- function(year) {
-  url <- sprintf("https://date.nager.at/api/v3/PublicHolidays/%s/CN", year)
-  response <- httr::GET(url)
-  if (httr::status_code(response) != 200) {
-    stop("Failed to retrieve data from Nager.Date API. Check the year or try again later.")
+
+  # Validate input
+  if (!is.numeric(year) || length(year) != 1) {
+    message("`year` must be a single numeric value.")
+    return(NULL)
   }
-  data <- jsonlite::fromJSON(httr::content(response, as = "text", encoding = "UTF-8"))
+
+  url <- sprintf(
+    "https://date.nager.at/api/v3/PublicHolidays/%s/CN",
+    as.integer(year)
+  )
+
+  # Safe request with timeout
+  res <- tryCatch(
+    httr::GET(url, httr::timeout(10)),
+    error = function(e) {
+      message("Nager.Date API request failed: ", e$message)
+      return(NULL)
+    }
+  )
+
+  if (is.null(res)) {
+    return(NULL)
+  }
+
+  if (httr::status_code(res) != 200) {
+    message("Nager.Date API returned status: ", httr::status_code(res))
+    return(NULL)
+  }
+
+  txt <- tryCatch(
+    httr::content(res, as = "text", encoding = "UTF-8"),
+    error = function(e) return(NULL)
+  )
+
+  if (is.null(txt)) {
+    return(NULL)
+  }
+
+  data <- tryCatch(
+    jsonlite::fromJSON(txt),
+    error = function(e) return(NULL)
+  )
+
+  if (is.null(data) || nrow(data) == 0) {
+    message("No holiday data available for the specified year.")
+    return(NULL)
+  }
+
   tibble::tibble(
     date = as.Date(data$date),
     local_name = data$localName,
