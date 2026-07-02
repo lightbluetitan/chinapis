@@ -1,8 +1,11 @@
 # ChinAPIs
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![CRAN status](https://www.r-pkg.org/badges/version/ChinAPIs)](https://cran.r-project.org/package=ChinAPIs)
+[![CRAN downloads](https://cranlogs.r-pkg.org/badges/ChinAPIs)](https://cran.r-project.org/package=ChinAPIs)
+[![CRAN total downloads](https://cranlogs.r-pkg.org/badges/grand-total/ChinAPIs)](https://cran.r-project.org/package=ChinAPIs)
 
-The `ChinAPIs` package provides a unified interface to access open data from the **World Bank API**, **Nager.Date API**, and the **REST Countries API**, with a focus on **China**. It allows users to retrieve up-to-date information on topics such as economic indicators, population statistics, unemployment rates, holidays, and basic geopolitical details.
+The `ChinAPIs` package provides a unified interface to access open data from the **World Bank API** and **Nager.Date API**, with a focus on **China**. It allows users to retrieve up-to-date information on topics such as economic indicators, population statistics, unemployment rates, and holidays.
 
 In addition to API-access functions, the package includes one of the largest curated collections of open datasets related to **China** and **Hong Kong**. These datasets cover areas such as air quality, demographic indicators, input-output economic tables, epidemiology, administrative divisions, name distributions, political structure, and various social indicators.
 
@@ -30,8 +33,6 @@ library(ChinAPIs)
 ### ChinAPIs Functions
 
 Below is a list of the main functions included in the package:
-
-- `get_country_info_cn()`: Get key geopolitical and administrative information about China from the REST Countries API.
 
 - `get_china_gdp()`: Get China’s Gross Domestic Product (current US$) from the World Bank
 
@@ -87,10 +88,6 @@ Here are some featured examples:
 # Load the package
 
 library(ChinAPIs)
-
-# Retrieves essential information about China
-
-get_country_info_cn()
 
 # Get China's Population (Total) from World Bank
 

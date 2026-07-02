@@ -1,6 +1,6 @@
 # ChinAPIs - Access Chinese Data via APIs and Curated Datasets
-# Version 0.1.1
-# Copyright (c) 2026 Renzo Caceres Rossi
+# Version 0.2.0
+# Copyright (C) 2025-2026 Renzo Caceres Rossi
 # Licensed under the MIT License.
 # See the LICENSE file in the root directory for full license text.
 
@@ -65,11 +65,15 @@ get_china_hospital_beds <- function() {
 
     data <- content[[2]]
 
+    # CORRECCIÓN: Convertir valores vacíos a NA y asegurar tipo numérico
+    value <- as.numeric(data$value)
+    value[is.na(value) | value == "" | is.null(value)] <- NA
+
     dplyr::as_tibble(data.frame(
       indicator = data$indicator$value,
       country   = data$country$value,
       year      = as.integer(data$date),
-      value     = as.numeric(data$value)
+      value     = value
     ))
 
   }, error = function(e) {

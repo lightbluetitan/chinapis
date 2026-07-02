@@ -1,3 +1,20 @@
+# ChinAPIs 0.2.0
+
+## Breaking Changes
+
+- **Removed `get_country_info_cn()`** from the package. This function depended on the
+  'REST Countries' API v3.1 endpoint, which was deprecated by its provider. The
+  replacement v5 endpoint now requires an API key, which is incompatible with CRAN's
+  policy that packages using Internet resources must work without user-supplied
+  credentials. As a consequence, all associated tests, documentation, and examples
+  have been removed, and references to the 'REST Countries API' have been removed
+  from the package (`DESCRIPTION`, `README.md`, vignette).
+
+- The package now integrates **two** APIs instead of three: **World Bank API** and
+  **Nager.Date API**.
+
+---
+
 # ChinAPIs 0.1.1
 
 ## Bug Fixes
